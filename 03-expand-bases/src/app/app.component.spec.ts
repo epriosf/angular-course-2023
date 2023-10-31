@@ -1,9 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { DbzModule } from './dbz/dbz.module';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    declarations: [AppComponent]
+    declarations: [AppComponent],
+    imports: [DbzModule]
   }));
 
   it('should create the app', () => {
@@ -22,6 +24,11 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('03-expand-bases app is running!');
-  });
+    const spanElement = compiled.querySelector('span');
+    if (spanElement) {
+      expect(spanElement.textContent).toContain('03-expand-bases app is running!');
+    } else {
+      fail('The span element was not found.');
+    }
+    });
 });
